@@ -1,7 +1,22 @@
 FROM centos:centos7
 
-# tools
-# tree
+# Needed to run ice
+RUN yum update ; \
+    yum install -y libXext libpng libSM libXi libXrender libXrandr \
+        libXfixes libXcursor libXinerama freetype fontconfig
+
+RUN yum install -y glibc.i686 glib2.i686 \
+    zlib.i686 libXext.i686 libpng12.i686 \
+    libSM.i686 libXrender.i686 libXfixes.i686 libXrandr.i686 \
+    libXcursor.i686 freetype.i686 fontconfig.i686
+
+RUN yum install -y libXtst.i686 libXinerama.i686
+
+# Needed to run programmer
+RUN yum install -y libXft libusb libXScrnSaver
+
+# Personal programs needed
+RUN yum install -y tree
 
 # Env vars
 ENV USER=dev \
@@ -13,17 +28,19 @@ ENV USER=dev \
 
 # Setup box
 RUN mkdir -p $SETUP_PATH
+
 RUN mkdir -p $ICE_PATH
 COPY ./bin/iCEcube2setup_Sep_12_2017_1708.tgz $ICE_PATH
+COPY ./bin/license.dat $ICE_PATH
+RUN tar -zxvf $ICE_PATH/iCEcube2setup_Sep_12_2017_1708.tgz
+
 COPY ./bin/programmer_3_10_x64-111-2-x86_64-linux.rpm $SETUP_PATH
+RUN rpm -Uvh $SETUP_PATH/programmer_3_10_x64-111-2-x86_64-linux.rpm
 
-# tar -zxvf iCEcube2setup_Sep_12_2017_1708.tgz 
 
-# Setup user
-#RUN useradd -ms /bin/bash -G sudo $USER
-#RUN chown $USER:$USER -R $SERVER_ROOT_PATH
-
-#USER dev
+RUN adduser -u 1000 -g 100 $USER
+RUN chown 1000:100 -R $APP_ROOT_PATH
+USER dev
 
 # Finish
 WORKDIR /opt/tools

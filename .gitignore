@@ -68,3 +68,4 @@ env/
 # Dev tools
 lattice/bin/iCEcube2setup_Sep_12_2017_1708.tgz
 lattice/bin/programmer_3_10_x64-111-2-x86_64-linux.rpm
+lattice/bin/license.dat
