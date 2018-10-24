@@ -24,14 +24,18 @@ ENV USER=dev \
     TERM=xterm-256color \
     APP_ROOT_PATH=/opt/tools \
     SETUP_PATH=/opt/tools/setup \
+    LICENSE_PATH=/opt/tools/setup/license \
     ICE_PATH=/opt/tools/ice
 
 # Setup box
 RUN mkdir -p $SETUP_PATH
 
+RUN mkdir -p $LICENSE_PATH
+COPY ./bin/ice_license.dat $LICENSE_PATH
+COPY ./bin/diamond_license.dat $LICENSE_PATH
+
 RUN mkdir -p $ICE_PATH
 COPY ./bin/iCEcube2setup_Sep_12_2017_1708.tgz $ICE_PATH
-COPY ./bin/license.dat $ICE_PATH
 RUN tar -zxvf $ICE_PATH/iCEcube2setup_Sep_12_2017_1708.tgz
 
 COPY ./bin/programmer_3_10_x64-111-2-x86_64-linux.rpm $SETUP_PATH
