@@ -66,7 +66,7 @@ env/
 
 
 # Dev tools
-lattice/bin/iCEcube2setup_Sep_12_2017_1708.tgz
-lattice/bin/programmer_3_10_x64-111-2-x86_64-linux.rpm
-lattice/bin/ice_license.dat
-lattice/bin/diamond_license.dat
+lattice/official_tools/bin/iCEcube2setup_Sep_12_2017_1708.tgz
+lattice/official_tools/bin/programmer_3_10_x64-111-2-x86_64-linux.rpm
+lattice/official_tools/bin/ice_license.dat
+lattice/official_tools/bin/diamond_license.dat
